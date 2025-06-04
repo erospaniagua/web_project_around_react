@@ -1,0 +1,16 @@
+body {
+  background-color: #000000;
+  ;
+}
+.page{
+  font-family: "Inter", Arial, sans-serif;
+  color: white;
+  background-color: #000000;
+  ;
+  margin: 0;
+  width: 100%;
+  min-height: 100vh;
+  font-size: 16px;
+  line-height: 20px;
+}
+

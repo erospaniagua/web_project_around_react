@@ -21,8 +21,8 @@ function App() {
               </button>
             </div>
             <div className="main__content-paragraph">
-              <h2 className="main__paragraph main__paragraph_name"></h2>
-              <p className="main__paragraph main__paragraph_job"></p>
+              <h2 className="main__paragraph main__paragraph_name">eros</h2>
+              <p className="main__paragraph main__paragraph_job">developer</p>
               <button className="main__button main__button_edit">&#x1F58C;</button>
             </div>
             <button type="button" className="main__button main__button_add">
