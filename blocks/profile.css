@@ -1,0 +1,210 @@
+.main {
+  max-width: 880px;
+  margin: auto;
+  padding-top: 40px;
+}
+.main__profile {
+  display: grid;
+  grid-template-columns: 120px repeat(3, 1fr);
+  grid-template-rows: 120px;
+  grid-gap: 30px;
+  padding-bottom: 50px;
+}
+
+.main__profileimg-button {
+  position: relative;
+  background-color: black;
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.main__profile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: opacity 0.3s;
+}
+
+.main__pencil-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 32px;
+  height: 32px;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none; 
+}
+
+.main__profileimg-button:hover .main__profile-image {
+  opacity: 0.4;
+}
+
+.main__profileimg-button:hover .main__pencil-icon {
+  opacity: 1;
+}
+
+
+.main__content-paragraph {
+  max-width: 450px;
+  display: grid;
+  grid-column: 2 / 4;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  align-items: center;
+  grid-row-gap: 10px;
+  line-height: normal;
+}
+
+.main__paragraph {
+  max-width: 415px;
+}
+
+.main__paragraph_name {
+  grid-column: 1 / 4;
+  margin: 0;
+  font-size: 38px;
+  line-height: 48px;
+  font-weight: 600;
+  padding-top: 22px;
+  justify-self: flex-start;
+}
+
+.main__paragraph_job {
+  grid-column: 1 / 5;
+  grid-row: 2;
+  margin: 0;
+  font-size: 18px;
+  padding-bottom: 21px;
+  justify-self: flex-start
+}
+
+.main__button {
+  border: 2px inset;
+  background-color: rgba(0, 0, 0, 0);
+  color: #fff;
+  padding: 0;
+  cursor: pointer;
+}
+
+.main__button:hover {
+  opacity: 0.5;
+  ;
+}
+
+.main__button_edit {
+  width: 24px;
+  height: 24px;
+  align-self: end;
+  margin-bottom: 7px;
+}
+.main__button_add {
+  width: 150px;
+  height: 50px;
+  align-self:center;
+  justify-self: self-end;
+}
+
+
+.main__button_img:hover {
+  opacity: 0.9;
+}
+
+
+@media screen and (min-width: 320px) and (max-width: 584px) {
+  .main {
+    max-width: 584px;
+    padding-top: 20px;
+  }
+
+  .main__profile {
+    max-width: 290px;
+    grid-template-columns: 1fr;
+    grid-template-rows: 120px repeat(2, 50px);
+    justify-items: center;
+    margin: auto;
+    grid-row-gap: 20px;
+    padding-bottom: 30px;
+  }
+
+  .main__profileimg-button {
+    width: 120px;
+    height: 120px;
+  }
+
+  .main__content-image {
+    grid-column: 1/2;
+    align-self: center;
+  }
+
+  .main__content-paragraph {
+    grid-column: 1 / 2;
+    grid-row: 2;
+    grid-template-rows: repeat(2, 20px);
+    text-align: center;
+  }
+
+  .main__paragraph_name {
+    font-size: 22px;
+    padding: 0;
+    line-height: normal;
+    text-align: center;
+  }
+
+  .main__paragraph_job {
+    padding: 0;
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .main__button_edit {
+    width: 18px;
+    height: 18px;
+    margin: 0 0 0 10px;
+    align-self: center;
+  }
+
+  .main__button_add {
+    width: 100%;
+    grid-row: 3;
+    height: 50px;
+  }
+}
+
+@media screen and (min-width: 585px) and (max-width: 880px) {
+  .main__profile {
+    max-width: 700px;
+    margin: auto;
+    padding-bottom: 40px;
+  }
+
+  .main__paragraph_name {
+    font-size: 30px;
+    line-height: normal;
+    padding-top: 0;
+  }
+
+  .main__paragraph_job {
+    font-size: 14px;
+  }
+
+  .main__button_edit {
+    width: 22px;
+    height: 22px;
+    margin: 0 0 0 16px;
+    align-self: center;
+  }
+
+  .main__button_add {
+    width: 100%;
+  }
+}
+
+
