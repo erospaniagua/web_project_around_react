@@ -5,6 +5,8 @@
   text-align: center;
 }
 
+/* Remove unused React default styles */
+
 .logo {
   height: 6em;
   padding: 1.5em;

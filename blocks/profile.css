@@ -74,6 +74,7 @@
   line-height: 48px;
   font-weight: 600;
   padding-top: 22px;
+  justify-self: flex-start;
 }
 
 .main__paragraph_job {
@@ -82,6 +83,7 @@
   margin: 0;
   font-size: 18px;
   padding-bottom: 21px;
+  justify-self: flex-start
 }
 
 .main__button {
@@ -116,80 +118,93 @@
 }
 
 
-@media screen and (min-width: 320px) and (max-width: 584px){
-  .main{max-width: 584px;}
+@media screen and (min-width: 320px) and (max-width: 584px) {
+  .main {
+    max-width: 584px;
+    padding-top: 20px;
+  }
 
-  .main__profile{
+  .main__profile {
     max-width: 290px;
     grid-template-columns: 1fr;
     grid-template-rows: 120px repeat(2, 50px);
     justify-items: center;
     margin: auto;
-    grid-row-gap: 30px;
+    grid-row-gap: 20px;
     padding-bottom: 30px;
   }
-  .main__content-image{
+
+  .main__profileimg-button {
+    width: 120px;
+    height: 120px;
+  }
+
+  .main__content-image {
     grid-column: 1/2;
     align-self: center;
-
   }
-  .main__content-paragraph{
+
+  .main__content-paragraph {
     grid-column: 1 / 2;
     grid-row: 2;
     grid-template-rows: repeat(2, 20px);
+    text-align: center;
   }
 
   .main__paragraph_name {
     font-size: 22px;
     padding: 0;
     line-height: normal;
+    text-align: center;
   }
 
   .main__paragraph_job {
     padding: 0;
     font-size: 14px;
+    text-align: center;
   }
 
-  .main__button_edit{
+  .main__button_edit {
+    width: 18px;
+    height: 18px;
+    margin: 0 0 0 10px;
+    align-self: center;
+  }
+
+  .main__button_add {
+    width: 100%;
+    grid-row: 3;
+    height: 50px;
+  }
+}
+
+@media screen and (min-width: 585px) and (max-width: 880px) {
+  .main__profile {
+    max-width: 700px;
+    margin: auto;
+    padding-bottom: 40px;
+  }
+
+  .main__paragraph_name {
+    font-size: 30px;
+    line-height: normal;
+    padding-top: 0;
+  }
+
+  .main__paragraph_job {
+    font-size: 14px;
+  }
+
+  .main__button_edit {
     width: 22px;
     height: 22px;
     margin: 0 0 0 16px;
     align-self: center;
-
   }
-  .main__button_add{
+
+  .main__button_add {
     width: 100%;
-    grid-row: 3;
   }
-  }
-
-  @media screen and (min-width: 585px) and (max-width: 880px) {
-    .main__profile {
-      max-width: 700px;
-      margin: auto;
-      padding-bottom: 40px;
-    }
-
-    .main__paragraph_name {
-      font-size: 30px;
-      line-height: normal;
-      padding-top: 0;
-    }
-
-    .main__paragraph_job {
-      font-size: 14px;
-    }
-
-    .main__button_edit {
-      width: 22px;
-      height: 22px;
-      margin: 0 0 0 16px;
-      align-self: center;
-    }
-
-    .main__button_add {
-      width: 100%;
-    }
-  }
+}
 
 
