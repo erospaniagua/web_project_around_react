@@ -1,55 +1,12 @@
-import { useState } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import NewCard from './components/popup/Newcard/Newcard.jsx';
 import Popup from './components/popup/popup.jsx';
 import NewAvatar from './components/popup/NewAvatar/NewAvatar.jsx';
 import NewProfile from './components/popup/newprofile/NewProfile.jsx';
 import Card from './components/card/Card.jsx';
 import ImgPopup from './components/popup/ImgPopup/ImgPopup.jsx';
-
-const cards = [
-  {
-    isLiked: false,
-    _id: '5d1f0611d321eb4bdcd707dd',
-    name: 'Yosemite Valley',
-    link: 'https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_yosemite.jpg',
-    owner: '5d1f0611d321eb4bdcd707dd',
-    createdAt: '2019-07-05T08:10:57.741Z',
-  },
-  {
-    isLiked: false,
-    _id: '5d1f064ed321eb4bdcd707de',
-    name: 'Lake Louise',
-    link: 'https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lake-louise.jpg',
-    owner: '5d1f0611d321eb4bdcd707dd',
-    createdAt: '2019-07-05T08:11:58.324Z',
-  },
-  {
-    isLiked: true,
-    _id: '5d1f0658d321eb4bdcd707df',
-    name: 'Bald Mountains',
-    link: 'https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_bald-mountains.jpg',
-    owner: '5d1f0611d321eb4bdcd707dd',
-    createdAt: '2019-07-05T08:12:24.312Z',
-  },
-  {
-    isLiked: false,
-    _id: '5d1f0664d321eb4bdcd707e0',
-    name: 'Latemar',
-    link: 'https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_latemar.jpg',
-    owner: '5d1f0611d321eb4bdcd707dd',
-    createdAt: '2019-07-05T08:13:01.456Z',
-  },
-  {
-    isLiked: true,
-    _id: '5d1f0671d321eb4bdcd707e1',
-    name: 'Vanoise National Park',
-    link: 'https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_vanoise.jpg',
-    owner: '5d1f0611d321eb4bdcd707dd',
-    createdAt: '2019-07-05T08:14:00.001Z',
-  }
-];
-
-
+import api from '../../utils/api.js';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext.js'
 
 export default function Main() {
 
@@ -57,6 +14,29 @@ export default function Main() {
   const newCardPopup = { title: "Nuevo lugar", children: <NewCard /> };
   const newAvatar = {title: "Editar Foto de Perfil" , children:<NewAvatar/>}
   const newProfile = {title:"Editar Perfil" ,  children:<NewProfile/>}
+  const [cards, setCards] = useState([]);
+  const {user} = useContext(CurrentUserContext);
+  useEffect(() => {
+    api.getInitialCards().then((res) => {
+      setCards(res);
+    })
+  }, []);
+
+  async function handleCardLike(card) {
+    const isLiked = card.isLiked;
+  
+    const newCard = isLiked
+      ? await api.removeLike(card._id)
+      : await api.addLike(card._id);
+  
+    setCards((state) =>
+      state.map((currentCard) =>
+        currentCard._id === card._id ? newCard : currentCard
+      )
+    );
+  }
+
+
   function handleOpenPopup(popup) {
     setPopup(popup);
   }
@@ -72,13 +52,13 @@ export default function Main() {
           <div className="main__profile">
             <div className="main__content-image">
               <button className="main__profileimg-button" onClick={() => handleOpenPopup(newAvatar)}>
-                <img src="../images/image.jpg" alt="profile picture" className="main__profile-image" />
+                <img src={user.avatar} alt="profile picture" className="main__profile-image" />
                 <img src="../images/pencil-svgrepo-com.svg" alt="Edit icon" className="main__pencil-icon" />
               </button>
             </div>
             <div className="main__content-paragraph">
-              <h2 className="main__paragraph main__paragraph_name">eros</h2>
-              <p className="main__paragraph main__paragraph_job">developer</p>
+              <h2 className="main__paragraph main__paragraph_name">{user.name}</h2>
+              <p className="main__paragraph main__paragraph_job">{user.about}</p>
               <button className="main__button main__button_edit" onClick={() => handleOpenPopup(newProfile)}>&#x1F58C;</button>
             </div>
             <button type="button" className="main__button main__button_add" onClick={() => handleOpenPopup(newCardPopup)}>
@@ -90,7 +70,9 @@ export default function Main() {
               {cards.map((card)=>(<Card 
               key={card._id} 
               card={card} 
+              isLiked={card.isLiked}
               handleCardClick={handleCardClick}
+              onCardLike={handleCardLike}
               />
               ))}
             </ul>
