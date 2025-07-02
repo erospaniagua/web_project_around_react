@@ -7,19 +7,44 @@ import Footer from './footer/footer.jsx'
 import api from '../utils/api.js'
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js'
 function App() {
-  const [user , setUser] = useState({});
+  const [currentUser , setUser] = useState({});
+  const [popup, setPopup] = useState(null);
   useEffect(() => {
     api.getUserInfo().then((res) => {
-      console.log(res);
+      console.log(`user = ${res}`);
       setUser(res);
     })
   }, []);
+
+  const handleUserUpdate = async (user) => {
+   const updatedUser = await api.editProfile(user);
+   setUser(updatedUser);
+   console.log(`user cambiado a ${updatedUser}`);
+   handleClosePopup();
+  }
+
+  const handleUpdateAvatar = async (link) =>{
+    const updatedAvatar = await api.editProfileImg(link);
+    setUser(updatedAvatar);
+    console.log(`avatar cambiaado a ${updatedAvatar}`);
+    handleClosePopup();
+
+  }
+
+  function handleOpenPopup(popup) {
+    setPopup(popup);
+  }
+  function handleClosePopup() {
+    setPopup(null);
+  }
   return (
     <>
-    <CurrentUserContext.Provider value={{user}}>
+    <CurrentUserContext.Provider value={{currentUser, setUser, handleUserUpdate, handleUpdateAvatar}}>
       <div className="page">
         <Header/>
-        <Main/> 
+        <Main onClosePopup={handleClosePopup}
+              onOpenPopup={handleOpenPopup}
+              popup={popup}/> 
         <Footer/>
       </div>
       </CurrentUserContext.Provider>
