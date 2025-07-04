@@ -1,10 +1,10 @@
 import { useState, useEffect, useContext } from 'react';
 import NewCard from './components/popup/Newcard/Newcard.jsx';
 import Popup from './components/popup/popup.jsx';
-import NewAvatar from './components/popup/NewAvatar/NewAvatar.jsx';
-import NewProfile from './components/popup/newprofile/NewProfile.jsx';
+import EditAvatar from './components/popup/NewAvatar/NewAvatar.jsx';
+import EditProfile from './components/popup/newprofile/NewProfile.jsx';
 import Card from './components/card/Card.jsx';
-import ImgPopup from './components/popup/ImgPopup/ImgPopup.jsx';
+import ImagePopup from './components/popup/ImgPopup/ImgPopup.jsx';
 import api from '../../utils/api.js';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext.js'
 
@@ -12,13 +12,13 @@ export default function Main(props) {
   const {loading ,loadingHandler} = useContext(CurrentUserContext)
   const {onOpenPopup,onClosePopup,popup,cards,onCardLike,onCardDelete} = props
   const newCardPopup = { title: "Nuevo lugar", children: <NewCard loading={loading} loadingHandler={loadingHandler}/> };
-  const newAvatar = {title: "Editar Foto de Perfil" , children:<NewAvatar loading={loading} loadingHandler={loadingHandler}/>}
-  const newProfile = {title:"Editar Perfil" ,  children:<NewProfile loading={loading} loadingHandler={loadingHandler}/>}
+  const newAvatar = {title: "Editar Foto de Perfil" , children:<EditAvatar loading={loading} loadingHandler={loadingHandler}/>}
+  const newProfile = {title:"Editar Perfil" ,  children:<EditProfile loading={loading} loadingHandler={loadingHandler}/>}
   
   const {currentUser} = useContext(CurrentUserContext);
 
   function handleCardClick(card){
-    onOpenPopup({title:"OpenImg" ,children:<ImgPopup card={card}/>})
+    onOpenPopup({title:"OpenImg" ,children:<ImagePopup card={card}/>})
 
   }
    return(

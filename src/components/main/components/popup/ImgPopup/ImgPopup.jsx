@@ -1,6 +1,6 @@
 
 
-export default function ImgPopup(props){
+export default function ImagePopup(props){
     const {name, link }= props.card
     return (
         <div className="gallery__Opened__card__container">
