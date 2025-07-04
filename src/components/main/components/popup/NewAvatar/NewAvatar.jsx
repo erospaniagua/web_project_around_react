@@ -3,7 +3,7 @@ import { CurrentUserContext } from "../../../../../contexts/CurrentUserContext"
 
 export default function NewAvatar() {
 const inputRef = useRef(null)
-const {handleUpdateAvatar,setUser} = useContext(CurrentUserContext)
+const {handleUpdateAvatar,setUser,loading} = useContext(CurrentUserContext)
 
 function handleSubmit(e) {
   e.preventDefault();
@@ -28,7 +28,7 @@ function handleSubmit(e) {
            <input ref={inputRef} type="url" name="link" placeholder="Link:" id="profileLink" className="popup__nombre popup__margin popup__input" required/>
            <span className="popup__input-error popup__input-error_profileLink"></span>
          </label>       
-           <button type="submit" id="newImgProfile" className="popup__guardar popup__guardar-avatar">Guardar</button>       
+           <button type="submit" id="newImgProfile" className="popup__guardar popup__guardar-avatar">{`${loading? 'Cargando' : 'Guardar'}`}</button>       
           </form>          
          </> 
     )

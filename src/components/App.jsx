@@ -9,6 +9,7 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext.js'
 function App() {
   //estados
   const [currentUser , setUser] = useState({});
+  const [loading,setLoading] = useState(false)
   const [popup, setPopup] = useState(null);
   const [cards, setCards] = useState([]);
   //api para usuario
@@ -27,18 +28,30 @@ function App() {
   }, []);
 //user handlers
   const handleUserUpdate = async (user) => {
-   const updatedUser = await api.editProfile(user);
-   setUser(updatedUser);
+    startLoading();
+    try{const updatedUser = await api.editProfile(user);
+      setUser(updatedUser);
+    }catch(err){console.log('error al cambiar usuario', err)
+
+    }finally{
+      stopLoading();
+      handleClosePopup();
+    }
+   
    console.log(`user cambiado a ${updatedUser}`);
    handleClosePopup();
   }
 
   const handleUpdateAvatar = async (link) =>{
-    const updatedAvatar = await api.editProfileImg(link);
-    setUser(updatedAvatar);
-    console.log(`avatar cambiaado a ${updatedAvatar}`);
-    handleClosePopup();
+    startLoading();
+    try{const updatedAvatar = await api.editProfileImg(link);
+        setUser(updatedAvatar);
+      }catch(err){console.log(`error al cambiar foto de perfil`, err)
 
+      }finally{
+        setLoading()
+        handleClosePopup()
+      }
   }
 //popup handlers
   function handleOpenPopup(popup) {
@@ -68,16 +81,29 @@ function App() {
   }
 
   async function handleCardSubmit(data) {
-    const newcard = await api.addCard(data);
-    console.log(`new cards after submition ${newcard}`)
-    setCards([newcard,...cards]);
-    console.log(cards);
-    
+    startLoading();
+    try {
+      const newCard = await api.addCard(data);
+      setCards((prev) => [newCard, ...prev]);
+    } catch (err) {
+      console.error("Error adding card", err);
+    } finally {
+      stopLoading();
+      handleClosePopup();
+    }
+  }
+  //Loading state
+  function startLoading() {
+    setLoading(true);
+  }
+  
+  function stopLoading() {
+    setLoading(false);
   }
 
   return (
     <>
-    <CurrentUserContext.Provider value={{currentUser, setUser, handleUserUpdate, handleUpdateAvatar, handleCardSubmit,setCards}}>
+    <CurrentUserContext.Provider value={{currentUser, setUser, handleUserUpdate, handleUpdateAvatar, handleCardSubmit,setCards,loading}}>
       <div className="page">
         <Header/>
         <Main onClosePopup={handleClosePopup}

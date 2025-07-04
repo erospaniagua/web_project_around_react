@@ -1,7 +1,8 @@
 import {useRef, useContext} from 'react'
 import { CurrentUserContext } from "../../../../../contexts/CurrentUserContext"
 export default function NewCard() {
- const {handleCardSubmit,setCards} = useContext(CurrentUserContext)
+
+ const {handleCardSubmit,setCards, loading} = useContext(CurrentUserContext)
   const inputsRef = useRef({
     name: null,
     link: null,
@@ -9,7 +10,7 @@ export default function NewCard() {
    
   function handleSubmit(e){
     e.preventDefault();
-  handleCardSubmit({name:inputsRef.current.name.value, link:inputsRef.current.link.value});
+    handleCardSubmit({name:inputsRef.current.name.value, link:inputsRef.current.link.value});
   }
 
     return (
@@ -47,7 +48,7 @@ export default function NewCard() {
         </label>
   
         <button className="button popup__button popup__guardar" type="submit">
-          Guardar
+          {`${loading? 'Cargando' : 'Guardar'}`}
         </button>
         </form>         
       </>

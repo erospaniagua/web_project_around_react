@@ -9,11 +9,11 @@ import api from '../../utils/api.js';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext.js'
 
 export default function Main(props) {
-
+  const {loading ,loadingHandler} = useContext(CurrentUserContext)
   const {onOpenPopup,onClosePopup,popup,cards,onCardLike,onCardDelete} = props
-  const newCardPopup = { title: "Nuevo lugar", children: <NewCard /> };
-  const newAvatar = {title: "Editar Foto de Perfil" , children:<NewAvatar/>}
-  const newProfile = {title:"Editar Perfil" ,  children:<NewProfile/>}
+  const newCardPopup = { title: "Nuevo lugar", children: <NewCard loading={loading} loadingHandler={loadingHandler}/> };
+  const newAvatar = {title: "Editar Foto de Perfil" , children:<NewAvatar loading={loading} loadingHandler={loadingHandler}/>}
+  const newProfile = {title:"Editar Perfil" ,  children:<NewProfile loading={loading} loadingHandler={loadingHandler}/>}
   
   const {currentUser} = useContext(CurrentUserContext);
 

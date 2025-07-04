@@ -1,7 +1,7 @@
  import { CurrentUserContext } from "../../../../../contexts/CurrentUserContext"
  import {useContext, useState} from "react"
  export default function NewProfile (){
-   const {currentUser, handleUserUpdate}= useContext(CurrentUserContext);
+   const {currentUser, handleUserUpdate, loading}= useContext(CurrentUserContext);
    
    const [name, setName] = useState(currentUser.name);
    const [about, setAbout] = useState(currentUser.about);
@@ -52,7 +52,7 @@
                  onChange={handleAboutChange}/>
           <span className="popup__input-error popup__input-error_about"></span>
          </label>       
-         <button type="submit" id="newProfile" className="popup__guardar">Guardar</button>        
+         <button type="submit" id="newProfile" className="popup__guardar">{`${loading? 'Cargando' : 'Guardar'}`}</button>        
         </form>      
      </>
   )
