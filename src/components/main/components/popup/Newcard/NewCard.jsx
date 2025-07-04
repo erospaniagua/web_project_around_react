@@ -1,9 +1,24 @@
+import {useRef, useContext} from 'react'
+import { CurrentUserContext } from "../../../../../contexts/CurrentUserContext"
 export default function NewCard() {
+
+ const {handleCardSubmit,setCards, loading} = useContext(CurrentUserContext)
+  const inputsRef = useRef({
+    name: null,
+    link: null,
+  });
+   
+  function handleSubmit(e){
+    e.preventDefault();
+    handleCardSubmit({name:inputsRef.current.name.value, link:inputsRef.current.link.value});
+  }
+
     return (
       <>
       <form className="popup__form"
         name="card-form"
         id="new-card-form"
+        onSubmit={handleSubmit}
         noValidate>
         <label className="popup__field popup__field-title">
           <input
@@ -15,6 +30,7 @@ export default function NewCard() {
             placeholder="Title"
             required
             type="text"
+            ref={(el)=>(inputsRef.current.name = el)}
           />
           <span className="popup__input-error popup__input-error_title" id="card-name-error"></span>
         </label>
@@ -26,12 +42,13 @@ export default function NewCard() {
             placeholder="Image link"
             required
             type="url"
+            ref={(el)=>(inputsRef.current.link = el)}
           />
           <span className="popup__input-error popup__input-error_imgLink" id="card-link-error"></span>
         </label>
   
         <button className="button popup__button popup__guardar" type="submit">
-          Guardar
+          {`${loading? 'Cargando' : 'Guardar'}`}
         </button>
         </form>         
       </>
