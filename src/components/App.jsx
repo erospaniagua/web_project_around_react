@@ -15,14 +15,12 @@ function App() {
   //api para usuario
   useEffect(() => {
     api.getUserInfo().then((res) => {
-      console.log(`user = ${res}`);
       setUser(res);
     })
   }, []);
 //api para las targetas 
   useEffect(() => {
     api.getInitialCards().then((res) => {
-      console.log(res);
       setCards(res);
     })
   }, []);
@@ -37,8 +35,6 @@ function App() {
       stopLoading();
       handleClosePopup();
     }
-   
-   console.log(`user cambiado a ${updatedUser}`);
    handleClosePopup();
   }
 
