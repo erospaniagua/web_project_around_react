@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import NewCard from './components/popup/Newcard/Newcard.jsx';
 import Popup from './components/popup/popup.jsx';
 import EditAvatar from './components/popup/NewAvatar/NewAvatar.jsx';
-import EditProfile from './components/popup/newprofile/NewProfile.jsx';
+import EditProfile from './components/popup/NewProfile/NewProfile.jsx';
 import Card from './components/card/Card.jsx';
 import ImagePopup from './components/popup/ImgPopup/ImgPopup.jsx';
 import api from '../../utils/api.js';
